@@ -1,5 +1,5 @@
 # RNA_sequence
-Predicting the secondary structure of RNA
+## Predicting the secondary structure of RNA
 
 #Input:
 Input is fetched from the file 'data.txt' in the form of a string of base sequence
