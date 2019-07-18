@@ -320,7 +320,7 @@ def olke(seq, bases, keep_seq):
     # Imposing restrictions on the MISs one after the other.
     # 1) We choose the structures with the maximum number of stacking regions
     # 2) If there are several possible such structures, we then check which structures have the most no of consecutive stacks
-    # 3) If there are several possible such structures, we then compare the energies of the stacks based on the 'stakcing energy table'
+    # 3) If there are several possible such structures, we then compare the energies of the stacks based on the 'stacking energy table'
     # 4) If there are several possible such structures, we then compare the individual bond energies.
 
     # After these operations, we plot the structures obtained. These we say are the best possible structures. 

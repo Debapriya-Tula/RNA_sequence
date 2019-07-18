@@ -39,19 +39,25 @@
         }
         }
     </script>
+    
     <center>
         <div class="jumbotron jumbotron-fluid">
-                <div class="container" style='max-height: 1em;'>
-                    <h1>RNA Secondary Structure Prediction</h1>      
+                <div class="container" style='max-height: 1em; color:forestgreen'>
+                    <span style="float:right"><b>Created with love by:<br>
+                        Debapriya Tula(summer intern), <br>Piyali Sen(PhD research scholar)</b>
+                    </span>
+                    <h1 style="color: black">RNA Secondary Structure Prediction</h1>
                 </div>
         </div>
-        
+
         <form name="myForm" action="{% url 'app:predict'%}" method="POST" onsubmit="return validate_form()">
             {% csrf_token %}
             <table style="text-align: center" cellspacing="1">
               <tr>
                 <td><h6><b>Enter the sequence: <input type="text" minlength="5" name="input"></b></h6></td>
-                <td><h6><b>Enter the .x sequence: <input type="text" minlength="5" name="keep_seq"></b></h6></td>
+                <td><h6><b>Enter the constraints: <input type="text" minlength="5" name="keep_seq"></b></h6><br>
+                    <b><i>. represents incusion<br> x represents exclusion <br>from participation in base pairing</i><b>
+                </td>
               </tr>
               <tr>
                   <td colspan="2"><hr><h4><b>OR</b></h4></td>
