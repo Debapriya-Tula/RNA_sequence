@@ -397,7 +397,7 @@ def olke(seq, bases, keep_seq):
     
     output_graphs = []
     for req_df in best_table_df:
-        fig = plt.figure()
+        fig = plt.figure(figsize=(4,3))
         con_graph = nx.Graph()
         con_graph.add_nodes_from(list(range(length)))
         con_graph.add_edges_from(list(zip(req_df['from'], req_df['to'])))

@@ -4,8 +4,10 @@ from .rna_olke import olke
 from .rna_uv import u_v
 from pathlib import Path
 import os, time, re
+from RNA.settings import MEDIA_ROOT
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 
 def send_email(email, dot_bracket, seq):
@@ -28,22 +30,27 @@ def predict(request):
         keep_seq = request.POST['keep_seq']
         keep_seq = ''.join(re.split('\t| ', keep_seq))
         email = request.POST['mail']
-        f1 = request.POST['f1']
-        f2 = request.POST['keep_seq_file']
-        home = str(Path.home())
-        
-        
-        if f1 != '':
-            f1 = os.path.join(home, f1)
-            seq = open(f1, 'r').read().split('\n')[0]
+        f1 = request.FILES.get('f1', False)
+        f2 = request.FILES.get('keep_seq_file', False)
+        fs = FileSystemStorage()
+        if f1 is not False:
+            f1_name = f1.name
+            f1 = fs.save(f1_name, f1)
+            path = os.path.join(MEDIA_ROOT, f1_name)
+            seq = open(path, 'r').read().split('\n')[0]
             seq = ''.join(re.split('\t| ', seq))
+            os.remove(path)
+        
+        if f2 is not False:
+            f2_name = f2.name
+            f2 = fs.save(f2_name, f2)
+            path = os.path.join(MEDIA_ROOT, f2_name)
+            keep_seq = open(path, 'r').read().split('\n')[0]
+            keep_seq = ''.join(re.split('\t| ', keep_seq))
+            os.remove(path)
+        # home = str(Path.home())
             
-        if f2 != '':
-            f2 = os.path.join(home, f2)
-            keep_seq = open(f2, 'r').read().split('\n')[0]
-            keep_seq = ''.join(re.split('\t| ', keep_seq))  
-
-        print(len(seq), len(keep_seq))
+        # print(len(seq), len(keep_seq))
         if len(keep_seq) == 0:
             keep_seq = "." * len(seq)
             

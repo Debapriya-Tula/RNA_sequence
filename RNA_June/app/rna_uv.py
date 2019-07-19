@@ -258,7 +258,7 @@ def u_v(seq, bases, keep_seq):
 		return base64.b64encode(img.getvalue())
 
 	output_graphs = []
-	fig = plt.figure()
+	fig = plt.figure(figsize=(4,3))
 	# plt.title("The graph after applying U,V conditions")
 	nx.draw(cir_graph, node_color="black", font_color="white", with_labels=True, pos=nx.circular_layout(cir_graph))
 	c = cir_edge_frame
