@@ -8,7 +8,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>RNA Prediction</title>
 
+    <style>
+        table {
+        border-collapse: collapse;
+        }
+
+        tr {
+        border: none;
+        }
+
+        td:first-child {
+        border-right: solid 1px #000000;
+        }
+    </style>
 </head>
+
 <body background="{% static 'app/rna_t.jpg' %}" id='main-body'>
     <script>
         function validate_form(){
@@ -49,25 +63,41 @@
                     <h1 style="color: black">RNA Secondary Structure Prediction</h1>
                 </div>
         </div>
-
+        <br><br>
+        <b><h4>DO THIS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                OR
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                THIS
+        </h4></b>   
         <form name="myForm" action="{% url 'app:predict'%}" method="POST" onsubmit="return validate_form()">
             {% csrf_token %}
-            <table style="text-align: center" cellspacing="1">
+            <table style="text-align: center" cellspacing="100" cellpaddding="100">
               <tr>
-                <td><h6><b>Enter the sequence: <input type="text" minlength="5" name="input"></b></h6></td>
-                <td><h6><b>Enter the constraints: <input type="text" minlength="5" name="keep_seq"></b></h6><br>
-                    <b><i>. represents incusion<br> x represents exclusion <br>from participation in base pairing</i><b>
+                <td><h6><b>Step 1:<br><br>Enter the sequence: 
+                    <input type="text" minlength="5" name="input"></b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h6>
+                </td>
+                <td><h6><b>Step 1:<br><br>Upload a text(.txt) file<br>(keep file in HOME folder):<br> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    <input type="file" name="f1"></b></h6><br><br>
                 </td>
               </tr>
               <tr>
-                  <td colspan="2"><hr><h4><b>OR</b></h4></td>
-              </tr>
-              <tr>
-                <td><h6><b>Select a text(.txt) file to upload(keep file in HOME folder) <input type="file" name="f1"></b></h6></td>
-                <td><h6><b>Select a text file for .x sequence(keep file in HOME folder) <input type="file" name="keep_seq_file"></b></h6><br></td>
+                <td><h6><b>Step 2:<br><br>Enter the constraints: 
+                    <input type="text" minlength="5" name="keep_seq"></b>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h6>
+                    <b><i>. represents inclusion<br> x represents exclusion <br>from participation in base pairing</i><b>
+                </td>
+                <td><h6><b>Step 2:<br><br>Upload a text file for .x sequence<br>(keep file in HOME folder):<br> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="file" name="keep_seq_file"></b></h6><br>
+                </td>
               </tr>
             </table>
             
+            <br><br><br>
             <hr>
             <h6><b>Select the base pairs to keep:</b>
             <input type="checkbox" name="base" value="GU" checked> G-U &nbsp;

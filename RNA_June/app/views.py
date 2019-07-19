@@ -10,7 +10,7 @@ from django.conf import settings
 
 def send_email(email, dot_bracket, seq):
     subject = "The secondary structure hence predicted"
-    mes = ''
+    mes = 'The sequence you entered was: '+seq+'\n'
     for i in dot_bracket:
         mes += i
         mes += "\nLink to visualization: "+"http://nibiru.tbi.univie.ac.at/forna/forna.html?id=fasta&file=>header\\n"+seq+"\\n"+str(i)
@@ -44,6 +44,9 @@ def predict(request):
             keep_seq = ''.join(re.split('\t| ', keep_seq))  
 
         print(len(seq), len(keep_seq))
+        if len(keep_seq) == 0:
+            keep_seq = "." * len(seq)
+            
         if len(seq) != len(keep_seq):
             return render(request, 'app/rna.html', {'message': "Length of base sequence and .x sequence should be equal!"})
         
